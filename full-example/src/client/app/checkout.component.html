@@ -1,13 +1,15 @@
-<form [formGroup]="checkoutForm">
+<form [formGroup]="checkoutForm"
+      (ngSubmit)="submit()"
+      >
 
   <fieldset>
     <label>
       Name
-      <input>
+      <input formControlName="name">
     </label>
     <label>
       Card Number
-      <input>
+      <input formControlName="cardNumber">
     </label>
 
     <input type="submit" value="Checkout" />

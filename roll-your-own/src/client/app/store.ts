@@ -2,6 +2,7 @@
 
 import { Injectable } from '@angular/core'
 import { StoreLiteService, StoreLite, Reducer } from './store-lite.service'
+import { SubjectLite, ObservableLite } from './observable-lite'
 class ActionTypes {
   static readonly Checkout = 'Checkout';
 
@@ -40,8 +41,14 @@ export class AppStore {
 
   private store: StoreLite<AppState, Action>;
 
+  private subject: SubjectLite<AppState>;
+
   constructor(storeLite: StoreLiteService) {
     this.store = storeLite.create(logger(reducer), new AppState());
+
+    this.subject = new SubjectLite<AppState>;
+
+    this.store.subscribe(s => this.subject.sendNext(s));
   }
 
   dispatch(a: Action) {
@@ -49,8 +56,8 @@ export class AppStore {
   }
 
   // TODO - Observer-ify later
-  select<T>(f: (s: AppState) => T): any {
-    this.store.subscribe(f);
+  select<T>(mapper: (s: AppState) => T): ObservableLite<T> {
+    return this.subject.observable().map(mapper);
   }
 }
 

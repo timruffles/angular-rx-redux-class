@@ -34,6 +34,8 @@ export class CheckoutModel {
 })
 export class CheckoutSmartComponent implements OnInit {
 
+  @ViewChild(CheckoutComponent)
+  checkout: CheckoutComponent;
 
   // TODO pass state into the dumb component as a Observable from store
   // TODO convert events coming out of the component to a dispatched action
@@ -42,10 +44,16 @@ export class CheckoutSmartComponent implements OnInit {
 
   }
 
-  submitted(data: CheckoutData) {
-  }
+  // option 1 - imperative
+  // submitted(data: CheckoutData) {
+  //   console.log('smart heard', data);
+  // }
 
   ngOnInit() {
+    this.checkout
+      .submissions
+      .map(data => new CheckoutAction(data))
+      .subscribe(a => this.store.dispatch(a))
   }
 
 

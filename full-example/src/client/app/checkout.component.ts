@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit, EventEmitter, Output } from '@angular/core'
 import { FormBuilder, FormGroup } from '@angular/forms'
+import { CheckoutData } from './checkout.reducer'
 
 @Component({
   moduleId: module.id,
@@ -10,13 +11,20 @@ export class CheckoutComponent implements OnInit {
 
   checkoutForm: FormGroup;
 
+  @Output()
+  submissions = new EventEmitter<CheckoutData>();
+
   constructor(private formBuilder: FormBuilder) {
   }
 
   submit() {
+    this.submissions.emit(this.checkoutForm.value);
   }
 
   ngOnInit() {
-    this.checkoutForm = this.formBuilder.group([])
+    this.checkoutForm = this.formBuilder.group({
+      name: [''],
+      cardNumber: [''],
+    });
   }
 }

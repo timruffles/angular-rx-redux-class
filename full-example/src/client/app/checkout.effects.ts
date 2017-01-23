@@ -1,6 +1,9 @@
 import { Effect, Actions } from '@ngrx/effects'
-import { Http } from '@angular/http'
+import { Http, Headers, RequestOptions } from '@angular/http'
 import { Injectable } from '@angular/core'
+import { CheckoutActionType, CheckoutAction, CheckoutResolvedAction } from './checkout.reducer'
+import { Success, Failure } from './persistence-types'
+import { Observable } from 'rxjs/Rx'
 
 const API_URL = 'http://localhost:3999';
 
@@ -11,10 +14,24 @@ export class CheckoutEffects {
     private actions$: Actions
   ) { }
 
+
   @Effect() checkout$ = this.actions$
-    .ofType('TODO');
-  // TODO filter down to a single type of action
-  // TODO turn it into a stream of HTTP observables, talking to our API
-  // TODO turn the success response into a CheckoutResolvedAction
-  // TODO turn the error response into a CheckoutResolvedAction
+    // filter down to a single type of action
+    .ofType(CheckoutActionType.Checkout)
+    // TODO - fix typing issue
+    .map(({ data: { cardNumber: number, name } }: any) =>
+      JSON.stringify({ number, name})
+    )
+    .switchMap((jsonString: string) => {
+      const headers = new Headers({ 'Content-Type': 'application/json' });
+      const options = new RequestOptions({ headers: headers });
+
+      // turn it into a stream of HTTP observables, talking to our API
+      return this.http.post(API_URL + '/checkout', jsonString, options)
+        // turn the success response into a CheckoutResolvedAction
+        .map(res => res.json())
+        .map(data => new CheckoutResolvedAction(new Success(data)))
+        // turn the error response into a CheckoutResolvedAction
+        .catch(e => Observable.of(new CheckoutResolvedAction(new Failure(e))))
+    })
 }
