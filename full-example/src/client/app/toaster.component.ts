@@ -3,33 +3,28 @@
 import { Component, OnInit } from '@angular/core'
 import { Store } from '@ngrx/store'
 import { AppState } from './app.reducer'
+import { Observable } from 'rxjs'
 import { Toast } from './toaster.reducer'
 
-type Maybe<T> = T | undefined;
+const NULL_TOAST: Toast = {
+  message: '',
+  messageType: 'none' as any,
+}
 
 @Component({
+  moduleId: module.id,
   selector: 'ss-toaster',
-  host: {
-    '[class.success]': 'toast?.messageType === "success"',
-    '[class.error]': 'toast?.messageType === "error"',
-    '[class.displayed]': 'toast?.message != null',
-  },
-  template: "Toast {{ toast?.message }}"
+  templateUrl: 'toaster.component.html',
 })
 export class ToasterComponent implements OnInit {
 
-  public toast: Maybe<Toast>;
+  toast$: Observable<Toast>;
 
-  constructor(private store: Store<AppState>) {
-
-  }
+  constructor(private store: Store<AppState>) {}
 
   ngOnInit() {
-    this.store.subscribe(s => {
-      this.toast = s.toaster.displayed;
-    })
+    this.toast$ = this.store.select(s => s.toaster.displayed)
+      .map(toast => toast || NULL_TOAST)
   }
-
-
 
 }

@@ -63,7 +63,7 @@ button:hover {
 }
 
 
-ss-toaster {
+.ss-toaster {
   padding: 2em;
   position: fixed;
   bottom: -10em;
@@ -73,17 +73,17 @@ ss-toaster {
   transition: bottom 0.35s ease-in-out;
 }
 
-ss-toaster.success {
+.ss-toaster.success {
   background: springgreen;
   border: 1px solid greenyellow;
 }
 
-ss-toaster.error {
+.ss-toaster.error {
   background: orange;
   border: 1px solid orangered;
 }
 
-ss-toaster.displayed {
+.ss-toaster.displayed {
   bottom: 0;
 }
 

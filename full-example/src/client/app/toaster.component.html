@@ -1,0 +1,7 @@
+<div class='ss-toaster'
+  [class.success]='(toast$ | async).messageType === "success"'
+  [class.error]='(toast$ | async).messageType === "error"'
+  [class.displayed]='(toast$ | async).messageType !== "null"'
+ >
+  {{ (toast$ | async).message }}
+</div>
