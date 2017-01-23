@@ -61,3 +61,29 @@ button {
 button:hover {
   background-color: #28739e;
 }
+
+
+ss-toaster {
+  padding: 2em;
+  position: fixed;
+  bottom: -10em;
+  left: calc(50vw - 15em);
+  width: 30em;
+  text-align: center;
+  transition: bottom 0.35s ease-in-out;
+}
+
+ss-toaster.success {
+  background: springgreen;
+  border: 1px solid greenyellow;
+}
+
+ss-toaster.error {
+  background: orange;
+  border: 1px solid orangered;
+}
+
+ss-toaster.displayed {
+  bottom: 0;
+}
+

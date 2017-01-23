@@ -41,11 +41,22 @@ export class CheckoutResolvedAction {
   ) {}
 }
 
-export type CheckoutActions = CheckoutAction;
+export type AllCheckoutActions = CheckoutAction
+    | CheckoutResolvedAction;
 
-export function checkoutReducer(s: CheckoutState = new CheckoutState, a: CheckoutAction) {
-  // TODO implement the checkout reducer
-  return s;
+export function checkoutReducer(s: CheckoutState = new CheckoutState, a: AllCheckoutActions) {
+  switch(a.type) {
+    case CheckoutActionType.CheckoutResolved:
+
+      return {
+        ...s,
+        submissionState: a.result,
+      }
+
+    default:
+      return s;
+
+  }
 }
 
 export function getCheckoutModel(s: CheckoutState) {

@@ -4,8 +4,11 @@ import { Injectable } from '@angular/core'
 import { CheckoutActionType, CheckoutAction, CheckoutResolvedAction } from './checkout.reducer'
 import { Success, Failure } from './persistence-types'
 import { Observable } from 'rxjs/Rx'
+import { ShowToasterAction } from './toaster.reducer'
 
 const API_URL = 'http://localhost:3999';
+
+
 
 @Injectable()
 export class CheckoutEffects {
@@ -30,8 +33,15 @@ export class CheckoutEffects {
       return this.http.post(API_URL + '/checkout', jsonString, options)
         // turn the success response into a CheckoutResolvedAction
         .map(res => res.json())
-        .map(data => new CheckoutResolvedAction(new Success(data)))
+        .concatMap(data => (
+          Observable.from([
+            new CheckoutResolvedAction(new Success(data)),
+		        new ShowToasterAction(`Woohoo, checkout succeeded!`, 'success')
+          ])
+        ))
         // turn the error response into a CheckoutResolvedAction
-        .catch(e => Observable.of(new CheckoutResolvedAction(new Failure(e))))
+        .catch(() => Observable.of(
+          new ShowToasterAction(`Oh no, something went wrong`, 'error')
+        ))
     })
 }

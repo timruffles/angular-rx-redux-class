@@ -5,13 +5,16 @@
 import { Store, Dispatch, combineReducers, Reducer } from "redux";
 import { CheckoutState, checkoutReducer } from './checkout.reducer'
 import { Action } from './actions'
+import { toasterReducer, ToasterState } from './toaster.reducer'
 
 export class AppState {
   checkout = new CheckoutState;
+  toaster = new ToasterState;
 }
 
 export const reducer = stripActionPrototype(combineReducers({
   checkout: checkoutReducer,
+  toaster: toasterReducer,
 }));
 
 function stripActionPrototype(originalReducer: Reducer<{}>) {

@@ -14,6 +14,7 @@ import { CheckoutEffects } from './checkout.effects'
 
 import "./operators"
 import { storeLogger } from 'ngrx-store-logger'
+import { ToasterComponent } from './toaster.component'
 
 
 @NgModule({
@@ -26,7 +27,12 @@ import { storeLogger } from 'ngrx-store-logger'
     EffectsModule.run(CheckoutEffects)
   ],
 
-  declarations: [AppComponent, CheckoutComponent, CheckoutSmartComponent],
+  declarations: [
+    AppComponent,
+    CheckoutComponent,
+    CheckoutSmartComponent,
+    ToasterComponent
+  ],
   providers: [{
     provide: APP_BASE_HREF,
     useValue: '<%= APP_BASE %>'
