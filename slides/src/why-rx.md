@@ -3,7 +3,13 @@
 
 ## Firstly, Rx = library
 
-## Big idea is Observables
+## Made by this guy
+
+![erik](img/erik.jpg)
+
+## So you know it's good(?)
+
+## Big idea is `Observables`
 
 ## So why Observables?
 
@@ -69,9 +75,7 @@ const both = Promise.all([
 
 ## Observables
 
-- Proposed by Erik Mejier
-- Contract: `Next*(Complete|Error)?`
-- Zero or more values, optionally followed by one of Complete or Error
+![prom v obs](img/promises-v-observables.jpeg)
 
 ## Again, declarative to imperative is big idea
 
@@ -79,6 +83,13 @@ const both = Promise.all([
 
 - Try not to use them
 - Using them = smell: something is not reactive!
+
+
+## Time to build Rx!
+
+    ./roll-your-own
+
+
 
 
 

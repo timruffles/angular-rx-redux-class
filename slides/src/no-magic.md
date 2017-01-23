@@ -1,5 +1,8 @@
+## If you find these tools complex
+{bad:1}
+
 ## Don't panic
-{title:1}
+{good:1}
 
 ## You chose industrial strength tools!
 
@@ -9,9 +12,19 @@
 - RxJS is a big async tool
 - Redux is a very different way to manage state
 
-## So don't worry that it's hard
+## It's not you
 
-## It's all stuff you could build yourself
+## It really is hard!
 
-## Removing magic
+## But... you can build these tools
+
+## Down with magic!
+
+## First example: reducers
+
+    open Chrome
+    open snippet view
+    create a snippet and save
+    Cmd + Enter to run
+    
 

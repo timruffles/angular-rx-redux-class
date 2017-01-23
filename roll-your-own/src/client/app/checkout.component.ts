@@ -1,8 +1,4 @@
-
-
 import { Component, OnInit } from '@angular/core'
-import { RemoteStateType, AppStore, CheckoutAction, RemoteStates } from './store'
-import { ObservableLite } from './observable-lite'
 
 @Component({
   moduleId: module.id,
@@ -11,16 +7,15 @@ import { ObservableLite } from './observable-lite'
 })
 export class CheckoutComponent implements OnInit {
 
-  checkoutState$: ObservableLite<RemoteStateType> = ObservableLite.empty()
+  // TODO connect me up with the store!
 
-  constructor(private store: AppStore) {
+  constructor() {
   }
 
   ngOnInit() {
-    this.checkoutState$ = this.store.select(s => s.checkout.state);
   }
 
   checkout() {
-    this.store.dispatch(new CheckoutAction());
+    console.log("Hi there");
   }
 }

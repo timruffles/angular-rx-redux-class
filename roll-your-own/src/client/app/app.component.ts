@@ -1,5 +1,4 @@
-import { Component } from '@angular/core';
-import { AppStore, RemoteStates, RemoteStateType, CheckoutAction } from './store'
+import { Component } from '@angular/core'
 
 /**
  * This class represents the main application component.

@@ -3,15 +3,28 @@
 
 ## Agenda
 
-- Focussing on Rx + Redux in an NG2 context
-- Whys
-- Observables/async in depth
-- Worked example with all of the above tools
+## Focus: Rx + Redux
+
+- in an NG2 context
+
+## Whys
+
+## Observables/async in depth
+
+## Worked example with all of the above tools
 
 ## Method
 
-- Mostly exercises
+## Exercises
 
+## Rolling your own!
+
+## Concepts over APIs
+
+##      
+{notitle:1}
+
+![concept](img/concepts-vs-apis.jpeg)
 
 
 
