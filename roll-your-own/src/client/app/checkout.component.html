@@ -1,6 +1,7 @@
-<button [disabled]="(checkoutState$ | async) === 'Success'" (click)="checkout()">
+<button [disabled]="checkoutState === 'Success'"
+        (click)="checkout()">
   Checkout
 </button>
-<p>Checkout state: {{ checkoutState$ | async }}</p>
+<p>Checkout state: {{ checkoutState }}</p>
 
 

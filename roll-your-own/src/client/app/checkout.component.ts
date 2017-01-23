@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core'
+import { AppStore, RemoteStateType, RemoteStates, CheckoutAction, getCheckoutState } from './store'
 
 @Component({
   moduleId: module.id,
@@ -7,15 +8,23 @@ import { Component, OnInit } from '@angular/core'
 })
 export class CheckoutComponent implements OnInit {
 
-  // TODO connect me up with the store!
+  // DONE connect me up with the store!
 
-  constructor() {
+  private checkoutState: RemoteStateType = RemoteStates.Unstarted;
+
+  constructor(private store: AppStore) {
   }
 
   ngOnInit() {
+    // Imperative: everytime state changes, re-assign property
+    this.store.select(s =>
+      this.checkoutState = getCheckoutState(s)
+    );
   }
 
   checkout() {
-    console.log("Hi there");
+    this.store.dispatch(new CheckoutAction());
   }
 }
+
+

@@ -1,3 +1,8 @@
+/**
+ *  OUR REDUX!
+ *
+ *
+ */
 import  { Injectable, NgZone } from "@angular/core";
 import { SubjectLite } from './observable-lite'
 
@@ -27,6 +32,7 @@ export class StoreLiteService {
   }
 }
 
+// vanilla redux
 export class StoreLite<State, Action> {
 
   listeners: Listener<State>[] = [];

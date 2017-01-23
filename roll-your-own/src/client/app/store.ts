@@ -1,6 +1,7 @@
 
 
 import { Injectable } from '@angular/core'
+import { StoreLiteService, StoreLite, Reducer } from './store-lite.service'
 class ActionTypes {
   static readonly Checkout = 'Checkout';
 
@@ -8,6 +9,7 @@ class ActionTypes {
 
 export class CheckoutAction {
   readonly type = ActionTypes.Checkout;
+  readonly another = 'hi';
 }
 
 export type Action = CheckoutAction;
@@ -29,25 +31,54 @@ export class CheckoutState {
   state: RemoteStateType = RemoteStates.Unstarted;
 }
 
-class AppState {
+export class AppState {
   checkout = new CheckoutState();
 }
-
 
 @Injectable()
 export class AppStore {
 
-  constructor() {
+  private store: StoreLite<AppState, Action>;
+
+  constructor(storeLite: StoreLiteService) {
+    this.store = storeLite.create(logger(reducer), new AppState());
   }
 
   dispatch(a: Action) {
+    this.store.dispatch(a);
   }
 
+  // TODO - Observer-ify later
   select<T>(f: (s: AppState) => T): any {
+    this.store.subscribe(f);
   }
 }
 
+export function getCheckoutState(s: AppState) {
+  return s.checkout.state;
+}
 
-export function reducer(s: AppState, a: Action) {
-  return s;
+function logger<State,Action>(reducer: Reducer<State,Action>): Reducer<State,Action> {
+  return function(s:State, a: Action)  {
+    console.log("before", a, s);
+    const newState =  reducer(s, a);
+    console.log("after", a, newState);
+    return newState;
+  }
+}
+
+export function reducer(state: AppState, action: Action) {
+  switch(action.type) {
+    case ActionTypes.Checkout:
+      return {
+        ...state,
+        checkout: {
+          ...state.checkout,
+          state: RemoteStates.Loading,
+        },
+      };
+
+    default:
+      return state;
+  }
 }

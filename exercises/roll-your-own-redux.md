@@ -14,7 +14,7 @@ We're going to end up with a working Redux store, with Actions being dispatched 
 - Next, implement reduce with the following actions:
   - Return a state object after each action, with `{ value: sumSoFar }`, starting with `{ value: 0 }`
 
-```javascript
+```
 const actions = [
   { type: "add", value: 5 },
   { type: "add", value: -2 },
@@ -25,7 +25,7 @@ const actions = [
 
 - Now let's implement the full Redux `Store` API in `roll-your-own/src/client/app/store-lite.ts`
 
-```javascript
+```
 interface {
   getState(): State
   dispatch(action: Action): void
