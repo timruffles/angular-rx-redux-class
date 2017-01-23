@@ -1,0 +1,25 @@
+{
+  "name": "angular-2.4",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "class-demo-server": "1.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "cd node_modules/class-demo-server && npm start",
+    "postinstall": "cd full-example && npm i && cd .. && cd roll-your-own && npm i"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/timruffles/angular-rx-redux-class.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/timruffles/angular-rx-redux-class/issues"
+  },
+  "homepage": "https://github.com/timruffles/angular-rx-redux-class#readme"
+}

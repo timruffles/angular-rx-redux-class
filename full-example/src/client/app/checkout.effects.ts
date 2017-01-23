@@ -1,10 +1,8 @@
-
-
 import { Effect, Actions } from '@ngrx/effects'
 import { Http } from '@angular/http'
 import { Injectable } from '@angular/core'
-import { CheckoutActionType, CheckoutResolvedAction, Success } from './checkout.reducer'
-import { Observable } from 'rxjs/Observable'
+
+const API_URL = 'http://localhost:3999';
 
 @Injectable()
 export class CheckoutEffects {
@@ -13,15 +11,10 @@ export class CheckoutEffects {
     private actions$: Actions
   ) { }
 
-  @Effect() login$ = this.actions$
-    .ofType(CheckoutActionType.Checkout)
-    .map(action => JSON.stringify(action.payload))
-    // each new action creates an observable, we switch between them dropping the old
-    .switchMap(payload =>
-      this.http.post('/checkout', payload)
-      .map(res => (
-         new CheckoutResolvedAction(new Success(res.json()))
-      ))
-      .catch((e) => Observable.of(new CheckoutResolvedAction(e)))
-    );
+  @Effect() checkout$ = this.actions$
+    .ofType('TODO');
+  // TODO filter down to a single type of action
+  // TODO turn it into a stream of HTTP observables, talking to our API
+  // TODO turn the success response into a CheckoutResolvedAction
+  // TODO turn the error response into a CheckoutResolvedAction
 }

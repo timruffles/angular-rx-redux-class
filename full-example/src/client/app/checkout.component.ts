@@ -1,9 +1,5 @@
-
-
-import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core'
+import { Component, OnInit } from '@angular/core'
 import { FormBuilder, FormGroup } from '@angular/forms'
-import { CheckoutModel } from './checkout-smart.component'
-import { Observable } from 'rxjs/Observable'
 
 @Component({
   moduleId: module.id,
@@ -12,26 +8,15 @@ import { Observable } from 'rxjs/Observable'
 })
 export class CheckoutComponent implements OnInit {
 
-  checkoutForm : FormGroup;
-
-  @Output()
-  submission = new EventEmitter;
-
-  @Input()
-  model: Observable<CheckoutModel>;
+  checkoutForm: FormGroup;
 
   constructor(private formBuilder: FormBuilder) {
   }
 
   submit() {
-    this.submission.emit(this.checkoutForm.value);
   }
 
   ngOnInit() {
-    this.checkoutForm = this.formBuilder.group({
-      name: [''],
-      cardNumber: [''],
-    });
-
+    this.checkoutForm = this.formBuilder.group([])
   }
 }

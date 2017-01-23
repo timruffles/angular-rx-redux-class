@@ -5,7 +5,7 @@ import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { CheckoutComponent } from './checkout.component'
-import { ReactiveFormsModule } from '@angular/forms'
+import { ReactiveFormsModule, FormsModule } from '@angular/forms'
 import { CheckoutSmartComponent } from './checkout-smart.component'
 import { StoreModule } from '@ngrx/store'
 import { reducer, AppState } from './app.reducer'

@@ -1,12 +1,14 @@
-<form [formGroup]="checkoutForm"
-      (ngSubmit)="submit()"
-      >
+<form [formGroup]="checkoutForm">
 
-  <fieldset [disabled]="!(model | async).submittable">
-      <label>
-          Card Number
-          <input formControlName="cardNumber">
-      </label>
+  <fieldset>
+    <label>
+      Name
+      <input>
+    </label>
+    <label>
+      Card Number
+      <input>
+    </label>
 
     <input type="submit" value="Checkout" />
   </fieldset>

@@ -28,31 +28,24 @@ export class CheckoutModel {
   moduleId: module.id,
   selector: 'checkoutSmart',
   template: `
-    <checkout
-      [model]="model$"
-      (submission)="submitted($event)"
-      >
+    <checkout>
      </checkout>
   `
 })
 export class CheckoutSmartComponent implements OnInit {
 
-  @ViewChild(CheckoutComponent) checkoutComponent: CheckoutComponent;
 
-  model$: Observable<CheckoutModel> = Observable.of(CheckoutModel.initial());
+  // TODO pass state into the dumb component as a Observable from store
+  // TODO convert events coming out of the component to a dispatched action
 
   constructor(private store: Store<AppState>) {
 
   }
 
   submitted(data: CheckoutData) {
-    this.store.dispatch(new CheckoutAction(data));
   }
 
   ngOnInit() {
-    this.model$ = this.store.select(s =>
-      getCheckoutModel(s.checkout)
-    )
   }
 
 
