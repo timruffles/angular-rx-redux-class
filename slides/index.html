@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Tim Ruffles - Slides</title>
+  
+  <link rel="stylesheet" href="node_modules/reveal.js/css/reveal.min.css">
+  <link rel="stylesheet" href="node_modules/reveal.js/lib/css/zenburn.css">
+
+  <link rel="stylesheet" href="slides-theme/style.css">
+  <link rel="stylesheet" href="slides-theme/talk-specific.css">
+
+  <!-- demos -->
+
+  <!-- for live coding -->
+  <link rel="stylesheet" href="js/little-console.css" id="theme">
+
+  <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-24335480-1']);
+  _gaq.push(['_trackPageview']);
+
+  var asyncScript = function(src) {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = src;
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  };
+
+  asyncScript(('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js');
+  </script>
+
+  <script src="js/revealHooks.js"></script>
+
+</head>
+
+<body>
+
+  <div class="reveal">
+    <div class="slides">
+<section  class="front"><h2 id="angular-redux-rx">Angular, Redux, Rx</h2>
+<ul>
+<li>github.com/timruffles/<br>angular-rx-redux-class
+<a href="https://truffles.me.uk">@timruffles</a></li>
+</ul>
+</section>
+
+<section  class=""><h2 id="code-slides">Code + Slides</h2>
+<ul>
+<li>github.com/timruffles/angular-2-rx-redux-class</li>
+</ul>
+</section>
+
+<section  class=""><h2 id="today">Today</h2>
+<ul>
+<li>lots of coding</li>
+</ul>
+</section>
+
+<section  class=""><h2 id="questions">Questions</h2>
+<ul>
+<li>please ask them! :)</li>
+</ul>
+</section>
+
+<section  class=""><h2 id="exercise-driven">Exercise driven</h2>
+</section>
+
+<section  class=""><h2 id="can-you-read-the-docs-">Can you read the docs?</h2>
+</section>
+
+<section  class=""><h2 id="yes-">Yes!</h2>
+</section>
+
+<section  class=""><h2 id="reading-docs-programming-">Reading docs = programming! :)</h2>
+<!-- TODO add class specific docs -->
+</section>
+
+<section  class=""><h2 id="can-you-have-the-slides-">Can you have the slides?</h2>
+</section>
+
+<section  class=""><h2 id="yes-">Yes!</h2>
+<ul>
+<li>slides/index.html</li>
+</ul>
+</section>
+
+<section  class=""><h2 id="should-you-help-each-other-">Should you help each other?</h2>
+</section>
+
+<section  class=""><h2 id="yes-">Yes!</h2>
+</section>
+
+<section  class=""><h2 id="if-you-finish-early-explain-to-others">If you finish early, explain to others</h2>
+<ul>
+<li>teaching will really test your knowledge</li>
+</ul>
+</section>
+
+<section  class=""><h2 id="is-asking-for-help-a-good-idea-">Is asking for help a good idea?</h2>
+</section>
+
+<section  class=""><h2 id="yes-">Yes :)</h2>
+<ul>
+<li>you can always check API docs at home</li>
+<li>big questions/doubts are good to ask while I&#39;m in the room</li>
+</ul>
+</section>
+
+<section  class=""><h2 id="are-the-exercises-puzzles-">Are the exercises puzzles?</h2>
+</section>
+
+<section  class=""><h2 id="no-">No!</h2>
+</section>
+
+<section  class=""><h2 id="if-you-don-t-know-what-to-do-ask">If you don&#39;t know what to do, ask</h2>
+<ul>
+<li>it&#39;s hard to follow exercises</li>
+</ul>
+</section>
+
+<section  class=""><h2 id="any-questions-before-we-start-">Any questions before we start?</h2>
+</section>
+
+<section data-state='title' class=" title"><h2 id="today">Today</h2>
+</section>
+
+<section  class=""><h2 id="agenda">Agenda</h2>
+<ul>
+<li>Focussing on Rx + Redux in an NG2 context</li>
+<li>Whys</li>
+<li>Observables/async in depth</li>
+<li>Worked example with all of the above tools</li>
+</ul>
+</section>
+
+<section  class=""><h2 id="method">Method</h2>
+<ul>
+<li>Mostly exercises</li>
+</ul>
+</section>
+
+<section data-state='title' class=" title"><h2 id="don-t-panic">Don&#39;t panic</h2>
+</section>
+
+<section  class=""><h2 id="you-chose-industrial-strength-tools-">You chose industrial strength tools!</h2>
+</section>
+
+<section  class=""><h2 id="big-tools">Big tools</h2>
+<ul>
+<li>NG2 is a big framework</li>
+<li>RxJS is a big async tool</li>
+<li>Redux is a very different way to manage state</li>
+</ul>
+</section>
+
+<section  class=""><h2 id="so-don-t-worry-that-it-s-hard">So don&#39;t worry that it&#39;s hard</h2>
+</section>
+
+<section  class=""><h2 id="it-s-all-stuff-you-could-build-yourself">It&#39;s all stuff you could build yourself</h2>
+</section>
+
+<section  class=""><h2 id="removing-magic">Removing magic</h2>
+</section>
+
+<section data-state='title' class=" title"><h2 id="overview">Overview</h2>
+</section>
+
+<section  class=""><h2 id="single-page-apps">Single-page apps</h2>
+<ul>
+<li>Give us rich, seamless interactivity</li>
+<li>A lot more state to manage on the client</li>
+</ul>
+</section>
+
+<section  class=""><h2 id="lots-of-jobs-to-be-done">Lots of jobs to be done</h2>
+<ul>
+<li>Orchestration</li>
+<li>State</li>
+<li>Effects</li>
+<li>Rendering</li>
+</ul>
+</section>
+
+<section data-state='title' class=" title"><h2 id="orchestration">Orchestration</h2>
+</section>
+
+<section  class=""><h2 id="what-to-display-load-do-when">What to display/load/do, when</h2>
+</section>
+
+<section  class=""><h2 id="app-structure">App structure</h2>
+</section>
+
+<section data-state='title' class=" title"><h2 id="state">State</h2>
+</section>
+
+<section  class=""><h2 id="state-is-what-users-care-about">State is what users care about</h2>
+<ul>
+<li>What has happened so far?</li>
+</ul>
+</section>
+
+<section  class=""><h2 id="e-g">e.g</h2>
+<ul>
+<li>Money in bank account</li>
+<li>Messages being composed</li>
+<li>Forms being filled</li>
+</ul>
+</section>
+
+<section data-state='title' class=" title"><h2 id="effects">Effects</h2>
+</section>
+
+<section  class=""><h2 id="effects-cause-system-to-change-state">Effects cause system to change state</h2>
+</section>
+
+<section  class=""><h2 id="types-of-effects">Types of effects</h2>
+</section>
+
+<section  class=""><h2 id="user-interaction">User interaction</h2>
+<ul>
+<li>Clicking, mouse moves, keyboard input</li>
+<li>Voice, geo-location etc</li>
+<li>From local machine</li>
+</ul>
+</section>
+
+<section  class=""><h2 id="server-effects">Server effects</h2>
+<ul>
+<li>Request/Response via HTTP</li>
+<li>Push - EventSource, WebSockets</li>
+</ul>
+</section>
+
+<section  class=""><h2 id="browser-apis">Browser APIs</h2>
+<ul>
+<li>Timers, notifications of battery/network etc</li>
+</ul>
+</section>
+
+<section data-state='title' class=" title"><h2 id="rendering">Rendering</h2>
+</section>
+
+<section  class=""><h2 id="visualising-our-state">Visualising our state</h2>
+</section>
+
+<section  class=""><h2 id="giving-users-ways-to-effect-it">Giving users ways to effect it</h2>
+</section>
+
+<section  class=""><h2 id="roles">Roles</h2>
+<p><img src="img/roles.png" alt="roles"></p>
+</section>
+
+<section data-state='title' class=" title"><h2 id="takeaways-today">Takeaways today</h2>
+</section>
+
+<section  class=""><h2 id="three">Three</h2>
+</section>
+
+<section  class=""><h2 id="ng2-tree-of-smart-dumb-components">ng2 = tree of smart &amp; dumb components</h2>
+</section>
+
+<section  class=""><h2 id="redux-single-br-immutable-br-normalized-state">Redux = single, <br> immutable, <br> normalized state</h2>
+</section>
+
+<section  class=""><h2 id="observables-br-declarative-async">Observables = <br> declarative async</h2>
+</section>
+
+<section  class=""><h2 id="we-ll-come-back-to-these-lots">We&#39;ll come back to these, lots</h2>
+<ul>
+<li>NG2 = tree of smart + dumb components</li>
+<li>Redux = single, immutable, normalize state</li>
+<li>Observables = declarative async</li>
+</ul>
+</section>
+
+<section data-state='title' class=" title"><h2 id="redux">Redux</h2>
+</section>
+
+<section  class=""><h2 id="redux-is-about-state">Redux is about State</h2>
+</section>
+
+<section  class=""><h2 id="state-is-tricky">State is tricky</h2>
+</section>
+
+<section  class=""><h2 id="redux-gives-us-2-wins">Redux gives us 2 wins</h2>
+</section>
+
+<section  class=""><h2 id="single-point-of-truth-spot-">Single point of truth (SPOT)</h2>
+<ul>
+<li>All application state centralised</li>
+</ul>
+</section>
+
+<section  class=""><h2 id="single-interface-to-change-state">Single interface to change state</h2>
+<ul>
+<li>Via actions, only</li>
+</ul>
+</section>
+
+<section  class=""><h2 id="powerful-tooling">Powerful tooling</h2>
+<ul>
+<li>Potential for time-travelling debugger, etc</li>
+</ul>
+</section>
+
+<section  class=""><h2 id="parts">Parts</h2>
+<ul>
+<li>Reducer</li>
+<li>Action</li>
+</ul>
+</section>
+
+<section  class=""><h2 id="reducer">Reducer</h2>
+<ul>
+<li>same idea as <code>Array.prototype.reduce</code></li>
+</ul>
+<pre><code class="lang-javascript">function reduce(state, action) {
+   switch(...) {
+   }
+}
+</code></pre>
+</section>
+
+<section  class=""><h2 id="simple-contract">Simple contract</h2>
+<pre><code class="lang-typescript">type Reducer&lt;State, Action&gt; =
+  (s: State, a: Action) =&gt; State;
+</code></pre>
+</section>
+
+<section  class=""><h2 id="how-should-state-be-structured-">How should state be structured?</h2>
+</section>
+
+<section  class=""><h2 id="normalized">Normalized</h2>
+</section>
+
+<section  class=""><h2 id="what-is-normalization-">What is normalization?</h2>
+</section>
+
+<section  class=""><h2 id="avoiding-duplicating-state">Avoiding duplicating state</h2>
+</section>
+
+<section  class=""><h2 id="if-we-duplicate-state-we-lose-spot">If we duplicate state, we lose SPOT</h2>
+</section>
+
+<section  class=""><h2 id="e-g">e.g</h2>
+<ul>
+<li>What happens here when we wish to edit Alice&#39;s food?</li>
+</ul>
+<pre><code class="lang-typscript">const state = {
+  selectedUser: {
+    name: &#39;alice&#39;,
+    id: 12,
+    favouriteFood: &#39;cheese&#39;,
+  },
+  users: [{
+    name: &#39;alice&#39;,
+    id: 12,
+    favouriteFood: &#39;cheese&#39;,
+  }],
+}
+</code></pre>
+</section>
+
+<section  class=""><h2 id="normalized-version">Normalized version</h2>
+<ul>
+<li>Keep state flat, using ids for references</li>
+</ul>
+<pre><code class="lang-typscript">const state = {
+  selectedUser: 12,
+  users: [{
+    name: &#39;alice&#39;,
+    id: 12,
+    favouriteFood: &#39;cheese&#39;,
+  }],
+}
+</code></pre>
+</section>
+
+<section  class=""><h2 id="very-similar-to">Very similar to</h2>
+<ul>
+<li>SQL. Relational model</li>
+<li>Reading any database design book will help</li>
+</ul>
+</section>
+
+<section data-state='title' class=" title"><h2 id="selectors">Selectors</h2>
+</section>
+
+<section  class=""><h2 id="relational-data-is-not-convenient">Relational data is not convenient</h2>
+</section>
+
+<section  class=""><h2 id="selectors-are-your-data-access-api">Selectors are your data access API</h2>
+</section>
+
+<section  class=""><h2 id="e-g">e.g</h2>
+<pre><code class="lang-typscript">const state = {
+  selectedUser: 12,
+  users: [{
+    name: &#39;alice&#39;,
+    id: 12,
+    favouriteFood: &#39;cheese&#39;,
+  }],
+}
+
+function getSelectedUser(state: State)
+  : SelectedUser | undefined {
+  if(state.selectedUser) {
+    return state.users.find(
+      u =&gt; u.id === state.selectedUser
+    );
+  }
+}
+</code></pre>
+</section>
+
+<section  class=""><h2 id="selectors-should-be-composable">Selectors should be composable</h2>
+</section>
+
+<section  class=""><h2 id="so-">So...</h2>
+</section>
+
+<section  class=""><h2 id="let-s-build-our-own-redux-">Let&#39;s build our own redux!</h2>
+<p>Check you have node &gt; 6</p>
+<pre><code>./roll-your-own
+npm install
+</code></pre></section>
+
+<section data-state='title' class=" title"><h2 id="why-rx-">Why Rx?</h2>
+</section>
+
+<section  class=""><h2 id="firstly-rx-library">Firstly, Rx = library</h2>
+</section>
+
+<section  class=""><h2 id="big-idea-is-observables">Big idea is Observables</h2>
+</section>
+
+<section  class=""><h2 id="so-why-observables-">So why Observables?</h2>
+</section>
+
+<section  class=""><h2 id="challenges-with-async">Challenges with async</h2>
+<ul>
+<li>Bookeeping</li>
+<li>e.g when A, B happen then do C</li>
+<li>race &gt; 1 async actions etc</li>
+</ul>
+</section>
+
+<section  class=""><h2 id="let-s-go-back-1-step">Let&#39;s go back 1 step</h2>
+</section>
+
+<section  class=""><h2 id="promises">Promises</h2>
+</section>
+
+<section  class=""><h2 id="everyone-comfortable-with-promises-">Everyone comfortable with Promises?</h2>
+</section>
+
+<section  class=""><h2 id="give-us-a-value-for-async">Give us a <em>value</em> for async</h2>
+<pre><code class="lang-javascript">// we have no <em>value</em> to start using
+const xhrA = new XMLHttpRequest;
+xhrA.open(&#39;GET&#39;, &#39;some.data&#39;)
+xhrA.onload = function() {
+}
+
+const xhrB = new XMLHttpRequest;
+xhrB.open(&#39;GET&#39;, &#39;other.data&#39;)
+xhrB.onload = function() {
+  // manually implement combination logic here
+}
+</code></pre>
+</section>
+
+<section  class=""><h2 id="promises">Promises</h2>
+<pre><code class="lang-javascript">const both = Promise.all([
+  get(&#39;some.data&#39;),
+  get(&#39;other.data&#39;),
+])
+.then(([a,b]) =&gt; {
+  // we know if we&#39;re here we got both
+})
+.catch(e) =&gt; {
+  // we know if we&#39;re here one or both failed
+})
+</code></pre>
+</section>
+
+<section  class=""><h2 id="imperative-to-declarative">Imperative to Declarative</h2>
+<ul>
+<li>Imperative = we do bookeeping</li>
+<li>Declarative = we declare relationships</li>
+<li>Like Excel, C2 = A1 + B1, kept up to date</li>
+</ul>
+</section>
+
+<section  class=""><h2 id="promise-contract">Promise contract</h2>
+<ul>
+<li>1 x success OR 1 x error</li>
+</ul>
+</section>
+
+<section  class=""><h2 id="what-about-events-">What about events?</h2>
+<ul>
+<li>Things that can happen multiple times</li>
+<li>User input, streaming data etc</li>
+</ul>
+</section>
+
+<section  class=""><h2 id="promises-can-t-help-here">Promises can&#39;t help here</h2>
+</section>
+
+<section  class=""><h2 id="observables">Observables</h2>
+<ul>
+<li>Proposed by Erik Mejier</li>
+<li>Contract: <code>Next*(Complete|Error)?</code></li>
+<li>Zero or more values, optionally followed by one of Complete or Error</li>
+</ul>
+</section>
+
+<section  class=""><h2 id="again-declarative-to-imperative-is-big-idea">Again, declarative to imperative is big idea</h2>
+</section>
+
+<section  class=""><h2 id="-subscribe-and-subject-are-imperative"><code>subscribe</code> and <code>Subject</code> are imperative</h2>
+<ul>
+<li>Try not to use them</li>
+<li>Using them = smell: something is not reactive!</li>
+</ul>
+</section>
+
+<section  class=""><h2 id="thanks-">Thanks!</h2>
+<ul>
+<li><a href="truffles.me.uk/tips">truffles.me.uk/tips</a> for free resources</li>
+</ul>
+<p><a href="https://twitter.com/timruffles">@timruffles</a></p>
+</section>
+
+</div>
+</div>
+
+<!-- demo code -->
+<script src="node_modules/jquery/dist/jquery.min.js"></script>
+<script src="node_modules/lodash/index.js"></script>
+
+<!-- live coding -->
+<script src=js/little-console.js></script>
+<script src=js/showConsoles.js></script>
+
+<!-- reveal -->
+<script src="node_modules/reveal.js/lib/js/head.min.js"></script>
+<script src="node_modules/reveal.js/plugin/highlight/highlight.js"></script>
+<script src="node_modules/reveal.js/js/reveal.js"></script>
+<script src="js/revealConfig.js"></script>
+
+</body>
