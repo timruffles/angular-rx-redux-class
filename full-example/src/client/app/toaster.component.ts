@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core'
 import { Store } from '@ngrx/store'
 import { AppState } from './app.reducer'
 import { Observable } from 'rxjs'
-import { Toast } from './toaster.reducer'
+import { Toast, CloseToasterAction } from './toaster.reducer'
 
 const NULL_TOAST: Toast = {
   message: '',
@@ -25,6 +25,10 @@ export class ToasterComponent implements OnInit {
   ngOnInit() {
     this.toast$ = this.store.select(s => s.toaster.displayed)
       .map(toast => toast || NULL_TOAST)
+  }
+
+  dismiss() {
+    this.store.dispatch(new CloseToasterAction());
   }
 
 }

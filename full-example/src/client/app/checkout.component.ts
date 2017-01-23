@@ -1,5 +1,5 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core'
-import { FormBuilder, FormGroup } from '@angular/forms'
+import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { CheckoutData } from './checkout.reducer'
 
 @Component({
@@ -23,8 +23,12 @@ export class CheckoutComponent implements OnInit {
 
   ngOnInit() {
     this.checkoutForm = this.formBuilder.group({
-      name: [''],
-      cardNumber: [''],
+      name: ['', [
+        Validators.minLength(2),
+        Validators.maxLength(3000),
+        Validators.required
+      ]],
+      cardNumber: ['', [Validators.pattern(/^\s*(\d{4}[-\s*]?){4}\s*$/)]],
     });
   }
 }

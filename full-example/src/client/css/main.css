@@ -66,11 +66,17 @@ button:hover {
 .ss-toaster {
   padding: 2em;
   position: fixed;
+  display: block;
   bottom: -10em;
   left: calc(50vw - 15em);
   width: 30em;
+  height: 10em;
   text-align: center;
   transition: bottom 0.35s ease-in-out;
+}
+
+.ss-toaster button {
+  opacity: 0;
 }
 
 .ss-toaster.success {
@@ -87,3 +93,11 @@ button:hover {
   bottom: 0;
 }
 
+.ss-toaster.displayed  button {
+  opacity: 1;
+}
+
+
+.ng-invalid.ng-dirty {
+  border: 1px solid orangered;
+}

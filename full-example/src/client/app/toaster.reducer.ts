@@ -10,6 +10,10 @@ export class ShowToasterAction {
   ) {}
 }
 
+export class CloseToasterAction {
+  readonly type = 'CloseToaster';
+}
+
 export type Toast = {
   message: string;
   messageType: MessageType;
@@ -20,7 +24,7 @@ export class ToasterState {
 }
 
 type AllToastActions = ShowToasterAction
-  // future: | CloseToasterAction
+  | CloseToasterAction
 
 export function toasterReducer(state: ToasterState = new ToasterState, action: AllToastActions) {
   switch(action.type) {
@@ -37,6 +41,12 @@ export function toasterReducer(state: ToasterState = new ToasterState, action: A
           messageType,
         },
       };
+
+    case "CloseToaster":
+      return {
+        ...state,
+        displayed: null,
+      }
 
     default:
       return state;

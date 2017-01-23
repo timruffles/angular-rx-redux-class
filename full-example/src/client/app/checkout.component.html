@@ -6,10 +6,18 @@
     <label>
       Name
       <input formControlName="name">
+
+      <div *ngIf="checkoutForm.controls.name.errors?.minlength" class="error">
+        Your name should be at least {{ checkoutForm.controls.name?.errors?.minlength.requiredLength }} characters long
+      </div>
     </label>
     <label>
       Card Number
       <input formControlName="cardNumber">
+
+      <div *ngIf="checkoutForm.controls.cardNumber.errors" class="error">
+        Your card number is the long number on the front of your credit or debit card
+      </div>
     </label>
 
     <input type="submit" value="Checkout" />
