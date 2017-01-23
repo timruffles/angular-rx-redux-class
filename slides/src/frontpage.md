@@ -6,7 +6,7 @@
 
 ## Code + Slides
 
-- github.com/timruffles/angular-2-rx-redux-class
+- github.com/timruffles/angular-rx-redux-class
 
 ## Today
 
